@@ -1,0 +1,126 @@
+schema_version: relation_v2.0
+
+entity_types:
+  PER:
+    name: 人物
+    description: 自然人姓名或明确指向个人的称谓
+
+  ORG:
+    name: 机构
+    description: 公司、机关、事业单位、部门或其他组织
+
+  POSITION:
+    name: 职位
+    description: 职务、岗位或具有任职含义的身份
+
+  MONEY:
+    name: 金额
+    description: 带数值、币种或单位的金额表达
+
+relation_types:
+  任职于:
+    head_types: [PER]
+    tail_types: [ORG]
+    directional: true
+
+  担任职位:
+    head_types: [PER]
+    tail_types: [POSITION]
+    directional: true
+
+  收受金额:
+    head_types: [PER]
+    tail_types: [MONEY]
+    directional: true
+
+  支付金额:
+    head_types: [PER, ORG]
+    tail_types: [MONEY]
+    directional: true
+
+  关联机构:
+    head_types: [ORG]
+    tail_types: [ORG]
+    directional: true
+
+  受贿于:
+    head_types: [PER]
+    tail_types: [PER]
+    directional: true
+
+  朋友:
+    head_types: [PER]
+    tail_types: [PER]
+    directional: false
+
+  亲属:
+    head_types: [PER]
+    tail_types: [PER]
+    directional: false
+
+  亲密关系:
+    head_types: [PER]
+    tail_types: [PER]
+    directional: false
+
+  同事同学:
+    head_types: [PER]
+    tail_types: [PER]
+    directional: false
+
+  领导:
+    head_types: [PER]
+    tail_types: [PER]
+    directional: true
+
+  职务制约:
+    head_types: [PER]
+    tail_types: [PER]
+    directional: true
+
+  请托:
+    head_types: [PER]
+    tail_types: [PER]
+    directional: true
+
+  转请托:
+    head_types: [PER]
+    tail_types: [PER]
+    directional: true
+
+  指示办事:
+    head_types: [PER]
+    tail_types: [PER]
+    directional: true
+
+  帮助谋利:
+    head_types: [PER]
+    tail_types: [PER]
+    directional: true
+
+  利益输送:
+    head_types: [PER]
+    tail_types: [PER]
+    directional: true
+
+  中介介绍:
+    head_types: [PER]
+    tail_types: [PER]
+    directional: true
+
+  协助实施:
+    head_types: [PER]
+    tail_types: [PER]
+    directional: true
+
+  代收代持:
+    head_types: [PER]
+    tail_types: [PER]
+    directional: true
+
+  合谋:
+    head_types: [PER]
+    tail_types: [PER]
+    directional: false
+
+negative_relation: 无关系

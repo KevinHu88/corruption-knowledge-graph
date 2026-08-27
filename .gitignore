@@ -1,0 +1,53 @@
+# macOS and editor metadata
+.DS_Store
+**/.DS_Store
+.idea/
+.vscode/
+
+# Secrets and local environment overrides
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.local.example
+
+# Python environments and caches
+**/.venv/
+**/venv/
+**/env/
+**/label-studio-env/
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/.coverage
+**/htmlcov/
+
+# Node.js dependencies and build output
+**/node_modules/
+**/.next/
+**/.swc/
+**/coverage/
+**/*.tsbuildinfo
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+
+# Local application state and databases
+**/.label-studio/
+**/.prefect/
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+
+# Generated model binaries
+**/artifacts/models/
+**/*.pth
+**/*.pth.tar
+**/*.safetensors
+
+# General runtime output
+**/*.log
+**/.cache/
+**/tmp/
+**/temp/

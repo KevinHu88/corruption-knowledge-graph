@@ -1,0 +1,59 @@
+neo4j:
+  database: neo4j
+  batch_size: 500
+  connection_timeout: 30
+  max_connection_pool_size: 20
+  max_transaction_retry_time: 30
+  fetch_size: 1000
+  initialize_schema: true
+  use_merge: true
+  create_constraints: true
+
+graph_model:
+  use_claim_nodes: true
+  materialize_direct_relations: false
+  store_rejected_claims: true
+  merge_people_across_cases: false
+  store_full_evidence_text: true
+  allow_unreviewed_annotations: true
+  max_text_warning_chars: 100000
+
+node_types:
+  Person:
+    source_entity_type: PER
+    unique_key: entity_uid
+
+  Organization:
+    source_entity_type: ORG
+    unique_key: entity_uid
+
+  Position:
+    source_entity_type: POSITION
+    unique_key: entity_uid
+
+  Money:
+    source_entity_type: MONEY
+    unique_key: entity_uid
+
+entity_resolution:
+  person_key_fields:
+    - case_id
+    - normalized_name
+    - organization
+    - position
+
+  organization_alias_enabled: true
+  merge_people_across_cases: false
+
+claim:
+  required_properties:
+    - case_id
+    - doc_id
+    - text_id
+    - evidence_text
+    - status
+
+  allowed_status:
+    - MODEL_PREDICTED
+    - HUMAN_VERIFIED
+    - REJECTED

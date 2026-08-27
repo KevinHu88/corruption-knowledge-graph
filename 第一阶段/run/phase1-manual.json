@@ -1,0 +1,28 @@
+{
+  "batch_id": "manual-case-001",
+
+  "run_retrieval": false,
+
+  "raw_documents": [
+    {
+      "doc_id": "court-doc-001",
+      "doc_version_id": "v1",
+      "source_id": "manual",
+      "title": "钱强受贿案判决书",
+      "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "local_path": "/Users/kerel/Desktop/钱强.docx",
+      "metadata": {
+        "import_method": "manual"
+      }
+    }
+  ],
+
+  "run_annotation": true,
+  "publish_for_review": true,
+  "project_id": 1,
+
+  "run_review_sync": false,
+  "run_dataset_build": false,
+  "run_training": false,
+  "run_graph_ingestion": false
+}

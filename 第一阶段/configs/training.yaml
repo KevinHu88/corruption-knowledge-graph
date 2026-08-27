@@ -1,0 +1,87 @@
+ner:
+  model_type: bert_crf
+  pretrained_model: bert-base-chinese
+  max_length: 128
+  train_batch_size: 4
+  eval_batch_size: 4
+  learning_rate: 2.0e-5
+  task_layer_learning_rate: 1.0e-5
+  epochs: 5
+  weight_decay: 0.01
+  random_seed: 42
+
+relation:
+  primary_model: bert_entity
+
+  bert_entity:
+    pretrained_model: bert-base-chinese
+    max_length: 180
+    batch_size: 8
+    learning_rate: 2.0e-5
+    epochs: 5
+    random_seed: 42
+
+  cnn:
+    max_length: 128
+    batch_size: 160
+    learning_rate: 0.1
+    epochs: 100
+    hidden_size: 230
+    kernel_size: 3
+
+evaluation:
+  primary_metric: macro_f1
+  report_micro_f1: true
+  report_macro_f1: true
+  report_per_label_metrics: true
+  report_confusion_matrix: true
+
+promotion:
+  require_end_to_end_improvement: true
+  protect_key_relation_recall: true
+  key_relations:
+    - 合谋
+    - 转请托
+    - 利益输送
+    - 代收代持
+    - 协助实施
+
+modeling:
+  device: auto
+  datasets_root: artifacts/datasets
+
+  ner:
+    architecture: bert_crf
+    pretrained_model: artifacts/models/base/bootstrap-chinese-bert-tiny-v1
+    checkpoint_dir: artifacts/models/ner/bert_crf
+    checkpoint_path: artifacts/models/ner/bert_crf/bootstrap-untrained-v1
+    label_map_path: artifacts/models/ner/bert_crf/bootstrap-untrained-v1/label_map.json
+    label_order:
+      - X
+      - B-PER
+      - I-PER
+      - B-ORG
+      - I-ORG
+      - B-MONEY
+      - I-MONEY
+      - B-POSITION
+      - I-POSITION
+      - O
+      - "[START]"
+      - "[END]"
+    max_length: 512
+    stride: 64
+    batch_size: 16
+
+  relation:
+    architecture: bert_entity
+    pretrained_model: artifacts/models/base/bootstrap-chinese-bert-tiny-v1
+    checkpoint_dir: artifacts/models/relation/bert_entity
+    checkpoint_path: artifacts/models/relation/bert_entity/bootstrap-untrained-v1/model.pth.tar
+    relation_map_path: artifacts/models/relation/bert_entity/bootstrap-untrained-v1/relation_map.json
+    max_length: 512
+    batch_size: 16
+    mask_entity: false
+    negative_label: 无关系
+
+  end_to_end_evaluation_file:

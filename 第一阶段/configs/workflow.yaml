@@ -1,0 +1,157 @@
+workflow:
+  batch_size: 100
+  max_retries: 3
+  retry_delay_seconds: 30
+
+ingestion:
+  enable_url_deduplication: true
+  enable_content_deduplication: true
+  enable_near_duplicate_detection: false
+
+relevance_filter:
+  keyword_threshold: 3
+  llm_threshold: 0.65
+  window_size: 800
+  window_overlap: 150
+
+annotation:
+  default_annotator: llm
+  auto_repair_enabled: true
+  max_repair_attempts: 2
+  human_review_required: true
+  model_confidence_threshold: 0.65
+
+label_studio:
+  project_id:
+  batch_size: 100
+  text_data_key: text
+  text_to_name: text
+  entity_from_name: label
+  prediction_model_version: deep_model_annotation_v1
+  max_prediction_results_per_task: 500
+  review_strategy: latest_non_cancelled
+
+dataset:
+  split_by: case_id
+  train_ratio: 0.70
+  validation_ratio: 0.15
+  test_ratio: 0.15
+  random_seed: 42
+  output_dir: artifacts/datasets
+  strict_validation: true
+  freeze_test_set: true
+  deduplicate_by_text: true
+  deduplicate_relations: true
+  include_trace_fields: true
+  overwrite_schema_files: false
+  negative_sampling:
+    strategy: hard_and_random
+    negative_ratio: 1.0
+    max_negatives_per_text: 20
+    max_entity_distance_chars:
+    same_sentence_only: false
+    allow_reverse_negative_pairs: false
+
+training_trigger:
+  minimum_new_samples: 500
+  minimum_rare_relation_samples: 30
+  maximum_interval_days: 7
+  allow_manual_trigger: true
+
+prompts:
+  llm_preannotation:
+    path: prompts/llm_preannotation_prompt.jinja2
+    version: llm_preannotation_v1.0
+
+  relevance_filter:
+    path: prompts/relevance_filter_prompt.jinja2
+    version: relevance_v2.0
+
+  canonical_annotation:
+    path: prompts/canonical_annotation_prompt.jinja2
+    version: annotation_v2.0
+
+  annotation_repair:
+    path: prompts/annotation_repair_prompt.jinja2
+    version: repair_v2.0
+
+  conflict_review:
+    path: prompts/conflict_review_prompt.jinja2
+    version: conflict_v2.0
+
+text_processing:
+  allowed_content_types:
+    - text/plain
+    - text/html
+    - text/markdown
+    - application/pdf
+    - application/vnd.openxmlformats-officedocument.wordprocessingml.document
+  minimum_text_length: 20
+
+  relevance_window:
+    target_chars: 800
+    max_chars: 1200
+    overlap_chars: 150
+
+  relevance:
+    accept_threshold: 0.70
+    reject_threshold: 0.20
+    llm_review_between_thresholds: true
+    positive_terms:
+      受贿: 0.35
+      行贿: 0.35
+      请托: 0.30
+      转请托: 0.35
+      帮助谋利: 0.35
+      利益输送: 0.35
+      合谋: 0.35
+      串通: 0.30
+      围标: 0.30
+      陪标: 0.30
+      代收代持: 0.35
+      收受财物: 0.35
+      中介介绍: 0.25
+      协助实施: 0.25
+      领导: 0.10
+      亲属: 0.15
+      特定关系人: 0.25
+      承揽: 0.15
+      支付: 0.15
+      人民币: 0.10
+    negative_terms:
+      廉政教育: 0.35
+      政策解读: 0.35
+      理论学习: 0.30
+      广告: 0.50
+
+  deterministic_filter:
+    irrelevant_title_terms:
+      - 廉政教育
+      - 政策解读
+      - 理论学习
+      - 招聘
+    irrelevant_page_types:
+      - navigation
+      - advertisement
+      - search_result
+
+  span_merge:
+    max_gap_chars: 80
+
+  evidence_expansion:
+    before_sentences: 1
+    after_sentences: 1
+
+  model_input:
+    max_tokens: 480
+    overlap_tokens: 64
+    fallback_max_chars: 800
+    respect_sentence_boundary: true
+    tokenizer_from_ner_model: true
+    context_sentences: 1
+
+  batch:
+    max_concurrency: 4
+
+  llm_failure:
+    mark_partial: true

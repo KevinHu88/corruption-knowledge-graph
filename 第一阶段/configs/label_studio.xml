@@ -1,0 +1,36 @@
+<View>
+  <Header value="腐败案件实体与关系审核" />
+
+  <Relations>
+    <Relation value="任职于" />
+    <Relation value="担任职位" />
+    <Relation value="收受金额" />
+    <Relation value="支付金额" />
+    <Relation value="关联机构" />
+    <Relation value="受贿于" />
+    <Relation value="朋友" />
+    <Relation value="亲属" />
+    <Relation value="亲密关系" />
+    <Relation value="同事同学" />
+    <Relation value="领导" />
+    <Relation value="职务制约" />
+    <Relation value="请托" />
+    <Relation value="转请托" />
+    <Relation value="指示办事" />
+    <Relation value="帮助谋利" />
+    <Relation value="利益输送" />
+    <Relation value="中介介绍" />
+    <Relation value="协助实施" />
+    <Relation value="代收代持" />
+    <Relation value="合谋" />
+  </Relations>
+
+  <Labels name="label" toName="text">
+    <Label value="PER" background="#E57373" />
+    <Label value="ORG" background="#64B5F6" />
+    <Label value="POSITION" background="#81C784" />
+    <Label value="MONEY" background="#FFD54F" />
+  </Labels>
+
+  <Text name="text" value="$text" />
+</View>

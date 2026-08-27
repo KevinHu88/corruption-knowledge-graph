@@ -1,0 +1,22 @@
+请从下列裁判文书文本块中抽取可供人工审核的实体和关系预标注。
+
+【文本】
+{{ text }}
+
+【正式 schema】
+{{ schema }}
+
+【抽取要求】
+1. 实体类型只能是 PER、ORG、POSITION、MONEY。
+2. 关系类型只能来自 schema.relation_types，不输出“无关系”。
+3. 必须使用 Python 左闭右开字符位置，且 text[start:end] 必须等于 name。
+4. entity_id 依次使用 e1、e2、e3；relation_id 依次使用 r1、r2、r3。
+5. 关系必须有原文明确证据，head_id/tail_id 必须引用已输出实体。
+6. 严格遵守关系的 head_types、tail_types 和方向。
+7. 不得因两个实体共同出现就推断关系；证据不足时不输出。
+8. confidence 使用 0 到 1 之间数值。
+9. evidence_start/evidence_end 应覆盖直接支持关系的最小连续原文；无法确定时两者都为 null。
+10. 实体最多 100 个，关系最多 100 个；没有可靠结果时返回空数组。
+11. normalized_name 没有明确规范名时为 null；extraction_source 由系统填充，不输出该字段。
+
+仅依据当前文本块，不使用外部知识，不输出解释。

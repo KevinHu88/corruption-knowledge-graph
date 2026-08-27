@@ -1,0 +1,142 @@
+{
+  "generated_at": "2026-08-21T02:19:03.910715+00:00",
+  "summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "results": [
+    {
+      "id": "mock-doc-001",
+      "description": "上传文档事实问答",
+      "passed": true,
+      "failures": [],
+      "status_code": 200,
+      "route": "DOCUMENT",
+      "source_types": [
+        "document"
+      ],
+      "evidence_case_ids": [],
+      "retrieval_modes": [
+        "hybrid"
+      ],
+      "evidence_count": 1,
+      "answer_nonempty": true,
+      "upload_status": 201,
+      "duration_ms": 12.41
+    },
+    {
+      "id": "mock-graph-001",
+      "description": "无上传材料的图谱关系问答",
+      "passed": true,
+      "failures": [],
+      "status_code": 200,
+      "route": "GRAPH",
+      "source_types": [
+        "graph"
+      ],
+      "evidence_case_ids": [
+        "mock-case"
+      ],
+      "retrieval_modes": [],
+      "evidence_count": 2,
+      "answer_nonempty": true,
+      "upload_status": null,
+      "duration_ms": 1.73
+    },
+    {
+      "id": "mock-graph-002",
+      "description": "指定案件的图谱关系问答",
+      "passed": true,
+      "failures": [],
+      "status_code": 200,
+      "route": "GRAPH",
+      "source_types": [
+        "graph"
+      ],
+      "evidence_case_ids": [
+        "mock-case"
+      ],
+      "retrieval_modes": [],
+      "evidence_count": 2,
+      "answer_nonempty": true,
+      "upload_status": null,
+      "duration_ms": 1.53
+    },
+    {
+      "id": "mock-hybrid-001",
+      "description": "文档与图谱混合问答",
+      "passed": true,
+      "failures": [],
+      "status_code": 200,
+      "route": "HYBRID",
+      "source_types": [
+        "document",
+        "graph"
+      ],
+      "evidence_case_ids": [
+        "mock-case"
+      ],
+      "retrieval_modes": [
+        "hybrid"
+      ],
+      "evidence_count": 3,
+      "answer_nonempty": true,
+      "upload_status": 201,
+      "duration_ms": 3.23
+    },
+    {
+      "id": "mock-hybrid-002",
+      "description": "未命中显式路由词时默认混合检索",
+      "passed": true,
+      "failures": [],
+      "status_code": 200,
+      "route": "HYBRID",
+      "source_types": [
+        "document",
+        "graph"
+      ],
+      "evidence_case_ids": [
+        "mock-case"
+      ],
+      "retrieval_modes": [
+        "hybrid"
+      ],
+      "evidence_count": 3,
+      "answer_nonempty": true,
+      "upload_status": 201,
+      "duration_ms": 3.07
+    },
+    {
+      "id": "mock-scope-001",
+      "description": "不存在的案件范围不得返回图谱证据",
+      "passed": true,
+      "failures": [],
+      "status_code": 200,
+      "route": "GRAPH",
+      "source_types": [],
+      "evidence_case_ids": [],
+      "retrieval_modes": [],
+      "evidence_count": 0,
+      "answer_nonempty": true,
+      "upload_status": null,
+      "duration_ms": 2.37
+    },
+    {
+      "id": "mock-invalid-001",
+      "description": "空问题应被业务层拒绝",
+      "passed": true,
+      "failures": [],
+      "status_code": 400,
+      "route": null,
+      "source_types": [],
+      "evidence_case_ids": [],
+      "retrieval_modes": [],
+      "evidence_count": 0,
+      "answer_nonempty": false,
+      "upload_status": null,
+      "duration_ms": 1.55
+    }
+  ]
+}

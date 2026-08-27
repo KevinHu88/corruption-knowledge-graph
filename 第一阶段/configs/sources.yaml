@@ -1,0 +1,30 @@
+sources:
+  - source_id: ccdi
+    name: 中央纪委国家监委
+    enabled: true
+    domains:
+      - ccdi.gov.cn
+    search_backend: tavily
+    keywords:
+      - 受贿
+      - 行贿
+      - 请托
+      - 利益输送
+      - 合谋
+    overlap_days: 14
+    max_results: 2
+    rate_limit_seconds: 2
+
+  - source_id: court
+    name: 中国裁判文书网
+    enabled: true
+    domains:
+      - wenshu.court.gov.cn
+    search_backend: tavily
+    keywords:
+      - 受贿罪 判决书
+      - 行贿罪 判决书
+      - 串通投标罪 判决书
+    overlap_days: 14
+    max_results: 2
+    rate_limit_seconds: 2
